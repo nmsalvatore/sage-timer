@@ -27,8 +27,8 @@ class ClockRenderer:
         curses.use_default_colors()
         curses.init_pair(1, curses.COLOR_WHITE, -1)
         curses.init_pair(2, curses.COLOR_GREEN, -1)
-        curses.init_pair(3, curses.COLOR_BLUE, -1)
-        curses.init_pair(4, curses.COLOR_YELLOW, -1)
+        curses.init_pair(3, curses.COLOR_CYAN, -1)
+        curses.init_pair(4, curses.COLOR_MAGENTA, -1)
 
     def get_center_coordinates(self, text: str) -> tuple[int, int]:
         """
@@ -66,14 +66,14 @@ class ClockRenderer:
         Render the application title at the top left of the curses
         window.
         """
-        self.stdscr.addstr(1, 1, DisplayText.TITLE, curses.color_pair(2))
+        self.stdscr.addstr(1, 1, DisplayText.TITLE, curses.color_pair(2) | curses.A_BOLD)
 
     def render_clock(self, time_text: str):
         """
         Render the clock at the center of the curses window.
         """
         y, x = self.get_center_coordinates(time_text)
-        self.stdscr.addstr(y, x, time_text, curses.color_pair(1))
+        self.stdscr.addstr(y, x, time_text, curses.color_pair(1) | curses.A_BOLD)
 
     def render_status(self, status_text: str):
         """
@@ -120,7 +120,7 @@ class ClockRenderer:
         counter_text = f"Counter: {count}"
         y, x = self.stdscr.getmaxyx()
         x -= len(counter_text)
-        self.stdscr.addstr(y - 1, x - 1, counter_text, curses.color_pair(3))
+        self.stdscr.addstr(y - 1, x - 1, counter_text, curses.color_pair(3) | curses.A_BOLD)
 
     def render_warning(self, warning_text: str):
         """
