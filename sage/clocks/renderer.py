@@ -24,10 +24,11 @@ class ClockRenderer:
         Initialize curses color pairs.
         """
         curses.start_color()
-        curses.init_pair(1, curses.COLOR_WHITE, curses.COLOR_BLACK)
-        curses.init_pair(2, curses.COLOR_GREEN, curses.COLOR_BLACK)
-        curses.init_pair(3, curses.COLOR_BLUE, curses.COLOR_BLACK)
-        curses.init_pair(4, curses.COLOR_YELLOW, curses.COLOR_BLACK)
+        curses.use_default_colors()
+        curses.init_pair(1, curses.COLOR_WHITE, -1)
+        curses.init_pair(2, curses.COLOR_GREEN, -1)
+        curses.init_pair(3, curses.COLOR_BLUE, -1)
+        curses.init_pair(4, curses.COLOR_YELLOW, -1)
 
     def get_center_coordinates(self, text: str) -> tuple[int, int]:
         """
@@ -90,14 +91,14 @@ class ClockRenderer:
         self.stdscr.move(y + 1, 0)
         self.stdscr.clrtoeol()
 
-    def render_help_text(self, help_text = DisplayText.RUNNING_HELP):
+    def render_help_text(self, help_text=DisplayText.RUNNING_HELP):
         """
         Render the help text at the bottom left of the curses window.
         """
         y, _ = self.stdscr.getmaxyx()
         self.stdscr.addstr(y - 1, 1, help_text, curses.color_pair(3))
 
-    def clear_help_text(self, help_text = DisplayText.RUNNING_HELP):
+    def clear_help_text(self, help_text=DisplayText.RUNNING_HELP):
         """
         Clear the help text at the bottom left of the curses window.
         """
@@ -112,7 +113,7 @@ class ClockRenderer:
         y, x = self.get_center_coordinates(heading_text)
         self.stdscr.addstr(y - 1, x, heading_text, curses.color_pair(2))
 
-    def render_counter(self, count = 0):
+    def render_counter(self, count=0):
         """
         Render the counter at the bottom right of the curses window.
         """
