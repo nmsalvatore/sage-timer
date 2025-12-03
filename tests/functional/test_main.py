@@ -1,4 +1,3 @@
-import os
 import subprocess
 
 
@@ -10,7 +9,7 @@ def test_version():
         ["sage", "--version"], capture_output=True, text=True, timeout=5
     )
 
-    assert "sage, version 0.1.0" in result.stdout
+    assert "sage, version 0.1.2" in result.stdout
 
 
 def test_help():
